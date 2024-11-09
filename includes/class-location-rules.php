@@ -73,4 +73,23 @@ class CFM_Location_Rules {
         </div>
         <?php
     }
+
+    public static function get_location_label($location) {
+        if (empty($location) || !is_array($location)) {
+            return __('All', 'custom-fields-manager');
+        }
+
+        $labels = array();
+        foreach ($location as $rule_group) {
+            if (!empty($rule_group) && is_array($rule_group)) {
+                foreach ($rule_group as $rule) {
+                    if (isset($rule['param'])) {
+                        $labels[] = self::get_rule_label($rule);
+                    }
+                }
+            }
+        }
+
+        return !empty($labels) ? implode(', ', array_unique($labels)) : __('All', 'custom-fields-manager');
+    }
 } 

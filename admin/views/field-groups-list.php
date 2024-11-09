@@ -3,31 +3,43 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-// Get all field groups
-$field_groups = get_posts(array(
-    'post_type' => 'cfm_field_group',
-    'posts_per_page' => -1,
-    'orderby' => 'menu_order title',
-    'order' => 'ASC',
-));
+// Add success message handling
+$message = isset($_GET['message']) ? $_GET['message'] : '';
+if ($message === 'deleted') {
+    echo '<div class="notice notice-success is-dismissible"><p>' . 
+         esc_html__('Field group deleted successfully.', 'custom-fields-manager') . 
+         '</p></div>';
+}
 ?>
 
-<div class="cfm-field-groups-list">
-    <?php if (!empty($field_groups)) : ?>
-        <table class="wp-list-table widefat fixed striped">
-            <thead>
-                <tr>
-                    <th scope="col" class="column-title column-primary"><?php _e('Title', 'custom-fields-manager'); ?></th>
-                    <th scope="col"><?php _e('Fields', 'custom-fields-manager'); ?></th>
-                    <th scope="col"><?php _e('Location', 'custom-fields-manager'); ?></th>
-                    <th scope="col"><?php _e('Status', 'custom-fields-manager'); ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($field_groups as $group) : 
-                    if (!is_object($group)) {
-                        continue;
-                    }
+<div class="wrap">
+    <h1 class="wp-heading-inline">
+        <?php _e('Field Groups', 'custom-fields-manager'); ?>
+    </h1>
+    <a href="<?php echo esc_url(admin_url('admin.php?page=custom-fields-manager&tab=new-field-group')); ?>" class="page-title-action">
+        <?php _e('Add New', 'custom-fields-manager'); ?>
+    </a>
+
+    <table class="wp-list-table widefat fixed striped">
+        <thead>
+            <tr>
+                <th scope="col" class="column-title column-primary"><?php _e('Title', 'custom-fields-manager'); ?></th>
+                <th scope="col"><?php _e('Fields', 'custom-fields-manager'); ?></th>
+                <th scope="col"><?php _e('Location', 'custom-fields-manager'); ?></th>
+                <th scope="col"><?php _e('Status', 'custom-fields-manager'); ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $field_groups = get_posts(array(
+                'post_type' => 'cfm_field_group',
+                'posts_per_page' => -1,
+                'orderby' => 'title',
+                'order' => 'ASC'
+            ));
+
+            if (!empty($field_groups)) :
+                foreach ($field_groups as $group) :
                     $fields = get_post_meta($group->ID, 'fields', true) ?: array();
                     $location = get_post_meta($group->ID, 'location', true) ?: array();
                     ?>
@@ -45,12 +57,12 @@ $field_groups = get_posts(array(
                                     </a> |
                                 </span>
                                 <span class="duplicate">
-                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=custom-fields-manager&action=duplicate&id=' . $group->ID), 'duplicate_field_group'); ?>">
+                                    <a href="<?php echo esc_url(admin_url('admin.php?page=custom-fields-manager&tab=duplicate&id=' . $group->ID)); ?>">
                                         <?php _e('Duplicate', 'custom-fields-manager'); ?>
                                     </a> |
                                 </span>
-                                <span class="trash">
-                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=custom-fields-manager&action=delete&id=' . $group->ID), 'delete_field_group'); ?>" 
+                                <span class="delete">
+                                    <a href="<?php echo wp_nonce_url(admin_url('admin.php?page=custom-fields-manager&action=delete&id=' . $group->ID), 'delete_field_group_' . $group->ID); ?>" 
                                        class="submitdelete" 
                                        onclick="return confirm('<?php esc_attr_e('Are you sure you want to delete this field group?', 'custom-fields-manager'); ?>');">
                                         <?php _e('Delete', 'custom-fields-manager'); ?>
@@ -59,43 +71,17 @@ $field_groups = get_posts(array(
                             </div>
                         </td>
                         <td><?php echo count($fields); ?></td>
-                        <td>
-                            <?php
-                            if (!empty($location)) {
-                                $locations = array();
-                                foreach ($location as $group_rules) {
-                                    if (is_array($group_rules)) {
-                                        foreach ($group_rules as $rule) {
-                                            if (is_array($rule) && isset($rule['param'])) {
-                                                $locations[] = CFM_Location_Rules::get_rule_label($rule);
-                                            }
-                                        }
-                                    }
-                                }
-                                echo esc_html(implode(', ', array_unique($locations)));
-                            } else {
-                                echo '—';
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <?php 
-                            $status = get_post_status($group->ID);
-                            echo $status === 'publish' ? 
-                                esc_html__('Active', 'custom-fields-manager') : 
-                                esc_html__('Inactive', 'custom-fields-manager'); 
-                            ?>
-                        </td>
+                        <td><?php echo CFM_Location_Rules::get_location_label($location); ?></td>
+                        <td><?php echo get_post_status($group->ID) === 'publish' ? __('Active', 'custom-fields-manager') : __('Inactive', 'custom-fields-manager'); ?></td>
                     </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php else : ?>
-        <div class="cfm-no-field-groups">
-            <p><?php _e('No field groups found.', 'custom-fields-manager'); ?></p>
-            <a href="<?php echo esc_url(admin_url('admin.php?page=custom-fields-manager&tab=new-field-group')); ?>" class="button button-primary">
-                <?php _e('Create Your First Field Group', 'custom-fields-manager'); ?>
-            </a>
-        </div>
-    <?php endif; ?>
+                <?php
+                endforeach;
+            else :
+                ?>
+                <tr>
+                    <td colspan="4"><?php _e('No field groups found.', 'custom-fields-manager'); ?></td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
 </div> 

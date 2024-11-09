@@ -61,11 +61,13 @@ class CustomFieldsManager {
         require_once CFM_PATH . 'includes/class-ajax-handler.php';
         require_once CFM_PATH . 'includes/class-form-handler.php';
         require_once CFM_PATH . 'includes/class-field-display.php';
+        require_once CFM_PATH . 'includes/class-tools-handler.php';
 
         // Initialize handlers
         CFM_Ajax_Handler::init();
         CFM_Form_Handler::init();
         CFM_Field_Display::init();
+        CFM_Tools_Handler::init();
     }
 
     public function admin_enqueue_scripts($hook) {
@@ -142,6 +144,15 @@ class CustomFieldsManager {
                 'delete_posts' => 'manage_options',
             ),
             'supports' => array('title'),
+        ));
+    }
+
+    public static function get_settings() {
+        return get_option('cfm_settings', array(
+            'google_maps_api_key' => '',
+            'load_jquery' => false,
+            'disable_wysiwyg' => false,
+            'style_mode' => 'default'
         ));
     }
 }

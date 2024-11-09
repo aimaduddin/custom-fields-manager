@@ -6,6 +6,7 @@ if (!defined('ABSPATH')) {
 class CFM_Form_Handler {
     public static function init() {
         add_action('admin_init', array(__CLASS__, 'handle_form_submission'));
+        add_action('admin_init', array(__CLASS__, 'handle_delete_field_group'));
     }
 
     public static function handle_form_submission() {
@@ -115,5 +116,35 @@ class CFM_Form_Handler {
             ));
             exit;
         }
+    }
+
+    public static function handle_delete_field_group() {
+        if (!isset($_GET['action']) || $_GET['action'] !== 'delete') {
+            return;
+        }
+
+        if (!isset($_GET['id']) || !isset($_GET['_wpnonce'])) {
+            return;
+        }
+
+        if (!wp_verify_nonce($_GET['_wpnonce'], 'delete_field_group_' . $_GET['id'])) {
+            wp_die(__('Security check failed', 'custom-fields-manager'));
+        }
+
+        if (!current_user_can('manage_options')) {
+            wp_die(__('You do not have permission to delete field groups', 'custom-fields-manager'));
+        }
+
+        $group_id = intval($_GET['id']);
+        wp_delete_post($group_id, true);
+
+        wp_redirect(add_query_arg(
+            array(
+                'page' => 'custom-fields-manager',
+                'message' => 'deleted'
+            ),
+            admin_url('admin.php')
+        ));
+        exit;
     }
 } 
