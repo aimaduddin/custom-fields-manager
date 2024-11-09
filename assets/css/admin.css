@@ -1,0 +1,509 @@
+.cfm-admin {
+    margin: 20px 0;
+}
+
+.cfm-field {
+    margin-bottom: 20px;
+}
+
+.cfm-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cfm-instructions {
+    color: #666;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.cfm-text-field,
+.cfm-textarea-field,
+.cfm-number-field {
+    width: 100%;
+    max-width: 600px;
+}
+
+.cfm-field .required {
+    color: #dc3232;
+}
+
+/* Field Group Editor Styles */
+.cfm-field-group-editor {
+    margin-top: 20px;
+}
+
+.cfm-main-content {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* Fields List */
+.cfm-fields-list {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.cfm-field-settings {
+    border-bottom: 1px solid #ccd0d4;
+    background: #fff;
+}
+
+.cfm-field-settings:last-child {
+    border-bottom: none;
+}
+
+/* Field Settings Header */
+.cfm-field-settings-header {
+    padding: 15px;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.cfm-field-settings-header:hover {
+    background: #f0f0f1;
+}
+
+.cfm-field-handle {
+    width: 25px;
+    height: 25px;
+    background: #dcdcde;
+    border-radius: 3px;
+    margin-right: 10px;
+    cursor: move;
+    position: relative;
+}
+
+.cfm-field-handle::before {
+    content: "≡";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #50575e;
+}
+
+.cfm-field-label {
+    flex: 1;
+    font-weight: 600;
+}
+
+.cfm-field-type {
+    color: #666;
+    margin-right: 15px;
+    font-style: italic;
+}
+
+/* Field Settings Content */
+.cfm-field-settings-content {
+    padding: 20px;
+    border-top: 1px solid #dcdcde;
+    background: #fff;
+    display: none;
+}
+
+.cfm-field-settings-content .cfm-field {
+    padding: 16px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    background: #f8f9fa;
+}
+
+.cfm-field-settings-content .cfm-field:last-child {
+    margin-bottom: 0;
+}
+
+.cfm-field-settings-content .cfm-label {
+    color: #1d2327;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.cfm-field-settings-content input[type="text"],
+.cfm-field-settings-content textarea {
+    width: 100%;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.cfm-field-settings-content input[type="text"]:focus,
+.cfm-field-settings-content textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+/* Description text */
+.cfm-field-settings-content .description {
+    color: #646970;
+    font-size: 12px;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Required checkbox */
+.cfm-field-settings-content .cfm-field label input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* Field Controls */
+.cfm-field {
+    margin-bottom: 20px;
+}
+
+.cfm-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.cfm-instructions {
+    color: #666;
+    font-style: italic;
+    margin: 5px 0;
+    font-size: 13px;
+}
+
+.cfm-field input[type="text"],
+.cfm-field textarea,
+.cfm-field select {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+}
+
+/* Add Field Button */
+.cfm-add-field {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border: 2px dashed #c3c4c7;
+    border-radius: 4px;
+}
+
+/* Field Type Modal */
+.cfm-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 160000;
+}
+
+.cfm-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 30px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 4px;
+}
+
+.cfm-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+}
+
+/* Field Types Grid */
+.cfm-field-types {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.cfm-field-type {
+    border: 1px solid #ccd0d4;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.cfm-field-type:hover {
+    background: #f0f0f1;
+    border-color: #007cba;
+}
+
+/* Location Rules Styles */
+.cfm-rules-description {
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.cfm-location-rules-wrapper {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.cfm-location-rule {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 2fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.cfm-location-rule select {
+    width: 100%;
+    height: 35px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 0 24px 0 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #2c3338;
+    background-color: #fff;
+}
+
+.cfm-location-rule select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .cfm-location-rule {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+}
+
+/* Add these styles to improve the overall layout */
+.cfm-field-group-editor {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.cfm-settings-panel {
+    min-width: 280px;
+    max-width: 400px;
+}
+
+.cfm-fields-panel {
+    min-width: 0; /* Allow panel to shrink */
+    flex: 1;
+}
+
+/* Settings Panel */
+.cfm-settings-panel .postbox {
+    margin-bottom: 20px;
+}
+
+.cfm-settings-panel .hndle {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ccd0d4;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.cfm-settings-panel .inside {
+    padding: 15px;
+    margin: 0;
+}
+
+/* Submit Box */
+.cfm-submit-box {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    text-align: right;
+    position: sticky;
+    bottom: 20px;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.cfm-submit-box .button {
+    min-width: 150px;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .cfm-field-group-editor {
+        flex-direction: column;
+    }
+    
+    .cfm-settings-panel {
+        min-width: 100%;
+    }
+    
+    .cfm-location-rule {
+        flex-direction: column;
+    }
+    
+    .cfm-location-rule select {
+        width: 100%;
+    }
+}
+
+/* Add to your existing CSS */
+.cfm-field-type.processing {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+/* Field Name Input Styles */
+.cfm-field-name-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 8px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+}
+
+.cfm-field-name-input {
+    flex: 1;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    padding: 6px 8px;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #3c434a;
+}
+
+.cfm-field-name-input:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.cfm-regenerate-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px !important;
+    min-width: 30px;
+    height: 30px;
+    background: #fff !important;
+    border: 1px solid #8c8f94 !important;
+    border-radius: 4px !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cfm-regenerate-name:hover {
+    background: #f0f0f1 !important;
+    border-color: #2271b1 !important;
+    color: #2271b1;
+}
+
+.cfm-regenerate-name .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    margin: 0;
+}
+
+.cfm-field-name-description {
+    color: #646970;
+    font-size: 12px;
+    margin-top: 6px;
+    font-style: italic;
+}
+
+/* Add to your existing CSS */
+.cfm-add-rule,
+.cfm-add-rule-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #2271b1;
+    border-color: #2271b1;
+}
+
+.cfm-add-rule .dashicons,
+.cfm-add-rule-group .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.cfm-remove-rule {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    color: #cc1818;
+    border-color: #cc1818;
+}
+
+.cfm-remove-rule:hover {
+    background: #cc1818;
+    color: #fff;
+}
+
+.cfm-remove-rule .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+/* Add to your existing CSS */
+.cfm-location-rules-controls {
+    margin-top: 15px;
+}
+
+.cfm-location-rules-wrapper {
+    margin-bottom: 15px;
+}
+
+.cfm-add-rule,
+.cfm-add-rule-group {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cfm-add-rule .dashicons,
+.cfm-add-rule-group .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.cfm-rule-group-controls {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e2e4e7;
+}

@@ -1,0 +1,144 @@
+/* Post Editor Custom Fields Styling */
+.cfm-post-fields {
+    padding: 5px 0;
+}
+
+.cfm-post-field {
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.cfm-post-field:last-child {
+    margin-bottom: 0;
+}
+
+/* Label Styling */
+.cfm-post-field-label {
+    font-size: 13px;
+}
+
+.cfm-post-field-label label {
+    font-weight: 600;
+    color: #1d2327;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.cfm-post-field-label .required {
+    color: #d63638;
+    margin-left: 4px;
+}
+
+.cfm-post-field-label .description {
+    color: #646970;
+    font-style: italic;
+    margin: 4px 0 0;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* Input Styling */
+.cfm-post-field-input {
+    max-width: 100%;
+}
+
+.cfm-post-field input[type="text"],
+.cfm-post-field input[type="number"],
+.cfm-post-field input[type="email"],
+.cfm-post-field input[type="url"],
+.cfm-post-field textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.cfm-post-field input[type="text"]:focus,
+.cfm-post-field input[type="number"]:focus,
+.cfm-post-field input[type="email"]:focus,
+.cfm-post-field input[type="url"]:focus,
+.cfm-post-field textarea:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+/* Textarea Specific */
+.cfm-post-field textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Checkbox and Radio Styling */
+.cfm-post-field-checkbox .cfm-post-field-input,
+.cfm-post-field-radio .cfm-post-field-input {
+    padding-top: 5px;
+}
+
+.cfm-post-field input[type="checkbox"],
+.cfm-post-field input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Select Styling */
+.cfm-post-field select {
+    width: 100%;
+    max-width: 100%;
+    height: 36px;
+    padding: 0 24px 0 8px;
+    border: 1px solid #8c8f94;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* Meta Box Styling */
+#poststuff .postbox-header h2 {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e2e4e7;
+}
+
+.postbox .inside {
+    padding: 20px;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .cfm-post-field {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .cfm-post-field-label {
+        margin-bottom: 8px;
+    }
+}
+
+/* Field Type Specific Styling */
+.cfm-post-field-number input {
+    width: 150px;
+}
+
+.cfm-post-field-url input {
+    font-family: monospace;
+}
+
+/* Validation States */
+.cfm-post-field input:invalid,
+.cfm-post-field textarea:invalid,
+.cfm-post-field select:invalid {
+    border-color: #d63638;
+}
+
+.cfm-post-field .error-message {
+    color: #d63638;
+    font-size: 12px;
+    margin-top: 4px;
+} 
