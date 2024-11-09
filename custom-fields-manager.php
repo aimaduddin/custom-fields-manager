@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Custom Fields Manager
- * Plugin URI: https://yourwebsite.com/custom-fields-manager
- * Description: A powerful custom fields management plugin for WordPress
- * Version: 1.0.0
- * Author: Your Name
- * Author URI: https://yourwebsite.com
+ * Plugin Name: CFM - Custom Fields Manager
+ * Plugin URI: https://aimaduddin.my
+ * Description: A powerful WordPress plugin that simplifies the creation and management of custom post types and custom fields. Features include an intuitive interface for creating custom post types, managing custom fields, importing/exporting functionality, and seamless integration with popular page builders.
+ * Version: 1.1
+ * Author: Aima Aimaduddin bin Bollhasan
+ * Author URI: https://aimaduddin.my
  * Text Domain: custom-fields-manager
  * Domain Path: /languages
  */
@@ -16,7 +16,7 @@ if (!defined('ABSPATH')) {
 }
 
 // Define plugin constants
-define('CFM_VERSION', '1.0.0');
+define('CFM_VERSION', '1.1');
 define('CFM_PATH', plugin_dir_path(__FILE__));
 define('CFM_URL', plugin_dir_url(__FILE__));
 
@@ -41,6 +41,9 @@ class CustomFieldsManager {
         
         // Register post type
         add_action('init', array($this, 'register_post_type'));
+        
+        // Register custom post types
+        add_action('init', array($this, 'register_custom_post_types'));
         
         // Initialize admin
         if (is_admin()) {
@@ -145,6 +148,14 @@ class CustomFieldsManager {
             ),
             'supports' => array('title'),
         ));
+    }
+
+    public function register_custom_post_types() {
+        $custom_post_types = get_option('cfm_custom_post_types', array());
+        
+        foreach ($custom_post_types as $post_type => $args) {
+            register_post_type($post_type, $args);
+        }
     }
 
     public static function get_settings() {
